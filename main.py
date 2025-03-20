@@ -45,6 +45,17 @@ def attack_pok(message):
     else:
             bot.send_message(message.chat.id, "Чтобы атаковать, нужно ответить на сообщения того, кого хочешь атаковать")
 
+@bot.message_handler(commands=["info"])
+def info(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pokemon = Pokemon.pokemons[message.from_user.username]
+        bot.send_message(message.chat.id, pokemon.info())
+    else:
+        bot.reply_to(message, "Что-то пошло не так")
+
+
+
+
 
 
 
