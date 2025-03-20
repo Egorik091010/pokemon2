@@ -51,8 +51,16 @@ def info(message):
         pokemon = Pokemon.pokemons[message.from_user.username]
         bot.send_message(message.chat.id, pokemon.info())
     else:
-        bot.reply_to(message, "Что-то пошло не так")
+        bot.reply_to(message, "Сначал создай себе покемона")
 
+@bot.message_handler(commands=["feed"])
+def feed_pokemon(message):
+    if message.from_user.username in Pokemon.pokemons.keys():
+        pokemon = Pokemon.pokemons[message.from_user.username]
+        response = pokemon.feed()
+        bot.send_message(message.chat.id, response)
+    else:
+        bot.send_message(message.chat.id, "У тебя нет покемона")
 
 
 
